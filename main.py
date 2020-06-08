@@ -81,7 +81,7 @@ class MenuScreen(Screen):
         empty = tuple([None for i in range(6)])
 
         if self.facade.rotation_uncalib != empty:
-            self.gyrotext=self.facade.rotation_uncalib
+            #self.gyrotext=self.facade.rotation_uncalib
             print("UNCALIB:",self.facade.rotation_uncalib)
 
 sm=ScreenManager()
