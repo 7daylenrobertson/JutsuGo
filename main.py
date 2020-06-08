@@ -28,7 +28,6 @@ Builder.load_string("""
             size_hint: 0.3 , 0.3
             on_release:
                 root.enable()
-                vibrator.vibrate(1)
                 stop.disabled = not stop.disabled
                 start.disabled = not start.disabled
         
@@ -66,6 +65,7 @@ class MenuScreen(Screen):
         Clock.schedule_interval(self.get_rotation,1/20.)
         Clock.schedule_interval(self.get_rotation_uncalib,1/20.)
         print("Gyro is being turned on")
+        vibrator.vibrate(1)
     
     def disable(self):
         self.facade.disable()
