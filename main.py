@@ -61,8 +61,8 @@ class MenuScreen(Screen):
 
     def enable(self):
         self.facade.enable()
-        Clock.schedule_interval(self.get_rotation,1/20.)
-        Clock.schedule_interval(self.get_rotation_uncalib,1/20.)
+        Clock.schedule_interval(self.get_rotation,1)
+        Clock.schedule_interval(self.get_rotation_uncalib,1)
         print("Gyro is being turned on")
         vibrator.vibrate(1)
     
@@ -74,14 +74,14 @@ class MenuScreen(Screen):
 
     def get_rotation(self, dt):
         if self.facade.rotation != (None, None, None):
-            print("NORMAL:",self.facade.rotation)
+            print("NORMAL:",self.facade.rotation[0])
             
     def get_rotation_uncalib(self, dt):
         empty = tuple([None for i in range(6)])
 
         if self.facade.rotation_uncalib != empty:
             #self.gyrotext=self.facade.rotation_uncalib
-            print("UNCALIB:",self.facade.rotation_uncalib)
+            print("UNCALIB:",self.facade.rotation_uncalib[0])
 
 sm=ScreenManager()
 sm.add_widget(MenuScreen(name="menu"))
