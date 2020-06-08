@@ -40,7 +40,6 @@ Builder.load_string("""
             size_hint: 0.3 , 0.3
             on_release:
                 root.disable()
-                vibrator.vibrate(1)
                 stop.disabled = not stop.disabled
                 start.disabled = not start.disabled
         
