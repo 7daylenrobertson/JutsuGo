@@ -43,24 +43,25 @@ class MenuScreen(Screen):
         print("turned on")
         counter=0
         accelerometer.enable()
-        while counter<100:
-            try:
-                if accelerometer.acceleration[0]> 8.0:
-                    tts.speak(message="Forward")
-                    counter+=1
-                elif accelerometer.acceleration[0]< -8.0:
-                    tts.speak(message="Backward")
-                    counter+=1
-                elif accelerometer.acceleration[1]> 8.0:
-                    tts.speak(message="Up")
-                elif accelerometer.acceleration[1]< -8.0:
-                    tts.speak(message="Down")
-                elif accelerometer.acceleration[2]> 8.0:
-                    tts.speak(message="Left")
-                elif accelerometer.acceleration[2]< -8.0:
-                    tts.speak(message="Right")
-            except:
-                print("wait bruh")
+        try:
+            if accelerometer.acceleration[0]> 8.0:
+                tts.speak(message="Forward")
+                counter+=1
+                print(counter)
+            elif accelerometer.acceleration[0]< -8.0:
+                tts.speak(message="Backward")
+                counter+=1
+                print(counter)
+            elif accelerometer.acceleration[1]> 8.0:
+                tts.speak(message="Up")
+            elif accelerometer.acceleration[1]< -8.0:
+                tts.speak(message="Down")
+            elif accelerometer.acceleration[2]> 8.0:
+                tts.speak(message="Left")
+            elif accelerometer.acceleration[2]< -8.0:
+                tts.speak(message="Right")
+        except:
+            print("wait bruh")
 
     def disable(self):
         accelerometer.disable()
