@@ -44,17 +44,17 @@ class MenuScreen(Screen):
         counter=0
         accelerometer.enable()
         while counter<100:
-            if float(accelerometer.acceleration)[0]> 8.0:
+            if accelerometer.acceleration[0]> 8.0:
                 tts.speak(message="Forward")
                 counter+=1
-            elif float(accelerometer.acceleration)[0]< -8.0:
+            elif accelerometer.acceleration[0]< -8.0:
                 tts.speak(message="Backward")
                 counter+=1
-            elif float(accelerometer.acceleration)[1]> 8.0:
+            elif accelerometer.acceleration[1]> 8.0:
                 tts.speak(message="Up")
-            elif float(accelerometer.acceleration)[1]< -8.0:
+            elif accelerometer.acceleration[1]< -8.0:
                 tts.speak(message="Down")
-            elif float(accelerometer.acceleration)[2]> 8.0:
+            elif accelerometer.acceleration[2]> 8.0:
                 tts.speak(message="Left")
             elif accelerometer.acceleration[2]< -8.0:
                 tts.speak(message="Right")
