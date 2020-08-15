@@ -1,6 +1,6 @@
 import kivy
 kivy.require('1.11.1')
-from plyer import accelerometer
+from plyer import accelerometer, tts
 
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
@@ -41,8 +41,24 @@ class MenuScreen(Screen):
 
     def enable(self):
         print("turned on")
+        counter=0
         accelerometer.enable()
-        print(accelerometer.acceleration)
+        while counter<100:
+            if float(accelerometer.acceleration)[0]> 8.0:
+                tts.speak(message="Forward")
+                counter+=1
+            elif float(accelerometer.acceleration)[0]< -8.0:
+                tts.speak(message="Backward")
+                counter+=1
+            elif float(accelerometer.acceleration)[1]> 8.0:
+                tts.speak(message="Up")
+            elif float(accelerometer.acceleration)[1]< -8.0:
+                tts.speak(message="Down")
+            elif float(accelerometer.acceleration)[2]> 8.0:
+                tts.speak(message="Left")
+            elif accelerometer.acceleration[2]< -8.0:
+                tts.speak(message="Right")
+
     def disable(self):
         accelerometer.disable()
         print("turned OFF")   
