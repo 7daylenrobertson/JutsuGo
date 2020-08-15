@@ -45,56 +45,55 @@ Builder.load_string("""
 
 
 class MenuScreen(Screen):
-
+    moves=[]
     def enable(self):
         print("turned on")
-        moves=[]
         accelerometer.enable()
         try:
             if accelerometer.acceleration[0]> 8.0:
                 tts.speak(message="Forward")
-                moves.append("f")
-                print(moves)
+                self.moves.append("f")
+                print(self.moves)
             elif accelerometer.acceleration[0]< -8.0:
                 tts.speak(message="Backward")
-                moves.append("b")
-                print(moves)
+                self.moves.append("b")
+                print(self.moves)
             elif accelerometer.acceleration[1]> 8.0:
                 tts.speak(message="Up")
-                moves.append("u")
-                print(moves)
+                self.moves.append("u")
+                print(self.moves)
             elif accelerometer.acceleration[1]< -8.0:
                 tts.speak(message="Down")
-                moves.append("d")
-                print(moves)
+                self.moves.append("d")
+                print(self.moves)
             elif accelerometer.acceleration[2]> 8.0:
                 tts.speak(message="Right")
-                moves.append("r")
-                print(moves)
+                self.moves.append("r")
+                print(self.moves)
             elif accelerometer.acceleration[2]< -8.0:
                 tts.speak(message="Left")
-                moves.append("l")
-                print(moves)
+                self.moves.append("l")
+                print(self.moves)
         except:
             print("wait bruh")
 
     def disable(self):
-        moves=[]
+        self.moves=[]
         tts.speak(message="Retarted!")
-        print(moves) 
+        print(self.moves) 
 
     def submit(self):
-        if moves==["f","b","f"]:
+        if self.moves==["f","b","f"]:
             tts.speak(message="Fireball!")
-            moves=[]
+            self.moves=[]
 
-        elif moves==["l","u","r","u"]:
+        elif self.moves==["l","u","r","u"]:
             tts.speak(message="Lightning!") 
-            moves=[]
+            self.moves=[]
 
-        elif moves==["u","l","d","r","u"]:
+        elif self.moves==["u","l","d","r","u"]:
             tts.speak(message="Circle Of Pain!")
-            moves=[]  
+            self.moves=[]  
             
     
 
