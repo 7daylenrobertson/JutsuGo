@@ -7,7 +7,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.lang import Builder
 from kivy.clock import Clock
-
+import random
 Builder.load_string("""
 
 <MenuScreen>:
@@ -46,6 +46,82 @@ Builder.load_string("""
 
 class MenuScreen(Screen):
     moves=[]
+    health=100
+    enemy_health=100
+    ecounter=3
+    ucounter=3
+    accelerometer.enable()
+    print(accelerometer.acceleration)
+    
+    def enemy_counter(self):
+        tts.speak(message=self.ecounter)
+        self.ecounter-=1
+        if self.ecounter<=0:
+            if self.chosen_attack=="Fireball!":
+                if self.userA=="Shield":
+                    tts.speak(message="Defended!")
+                    self.ecounter=3
+                    Clock.unschedule(self.e_count)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule(eevent)
+                else:
+                    self.health-=10
+                    tts.speak(message=str(self.health)+" Health Left")
+                    self.ecounter=3
+                    Clock.unschedule(self.e_count)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule(eevent)
+
+            elif self.chosen_attack=="Lightning!":
+                if self.userA=="Shield":
+                    tts.speak(message="Defended!")
+                    self.ecounter=3
+                    Clock.unschedule(self.e_count)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule(eevent)
+                else:
+                    self.health-=10
+                    tts.speak(message=str(self.health)+" Health Left")
+                    self.ecounter=3
+                    Clock.unschedule(self.e_count)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule(eevent)
+
+            elif self.chosen_attack=="Energy Blast!":
+                if self.userA=="Shield":
+                    tts.speak(message="Defended!")
+                    self.ecounter=3
+                    Clock.unschedule(self.e_count)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule(eevent)
+                else:
+                    self.health-=20
+                    tts.speak(message=str(self.health)+" Health Left")
+                    self.ecounter=3
+                    Clock.unschedule(self.e_count)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule(eevent)
+
+            elif self.chosen_attack=="Circle Of Pain!":
+                if self.userA=="Shield":
+                    self.health-=5
+                else:
+                    self.health-=30
+                tts.speak(message=str(self.health)+" Health Left")
+                self.ecounter=3
+                Clock.unschedule(self.e_count)
+                eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                Clock.unschedule(eevent)
+
+    def enemy_attack(self):
+        attacks=["Fireball!","Lightning!","Energy Blast!","Circle Of Pain!","Shield"]
+        chosen_attack=random.choice(attacks)
+        tts.speak(message=chosen_attack)
+        e_count = Clock.schedule_interval(self.enemy_counter, 1)
+
+    eevent = Clock.schedule_interval(enemy_attack, 3)
+    Clock.unschedule(eevent)
+    
     def enable(self):
         print("turned on")
         accelerometer.enable()
@@ -79,21 +155,70 @@ class MenuScreen(Screen):
 
     def disable(self):
         self.moves=[]
-        tts.speak(message="Retarted!")
+        tts.speak(message="Restarted!")
         print(self.moves) 
+
+    def user_counter(self):
+        tts.speak(message=self.ucounter)
+        self.ucounter-=1
+        if self.ucounter<=0:
+            if self.userA=="Fire":
+                if self.chosen_attack=="Shield":
+                    tts.speak(message="Enemy Defended!")
+                    self.ucounter=3
+                    Clock.unschedule(u_count)
+
+                else:
+                    self.enemy_health-=10
+                    tts.speak(message=str(self.enemy_health)+" Enemy Health Left")
+                    self.ucounter=3
+                    Clock.unschedule(u_count)
+
+            elif self.userA=="Light":
+                if self.chosen_attack=="Shield":
+                    tts.speak(message="Enemy Defended!")
+                    self.ucounter=3
+                    Clock.unschedule(u_count)
+                else:
+                    self.enemy_health-=10
+                    tts.speak(message=str(self.enemy_health)+" Enemy Health Left")
+                    self.ucounter=3
+                    Clock.unschedule(u_count)
+
+
+            elif self.userA=="Circle Of Pain":
+                if self.chosen_attack=="Shield":
+                    self.enemy_health-=5
+                else:
+                    self.enemy_health-=30
+                tts.speak(message=str(self.enemy_health)+" Enemy Health Left")
+                self.ucounter=3
+                Clock.unschedule(u_count)
 
     def submit(self):
         if self.moves==["f","b","f"]:
+            userA="Fire"
             tts.speak(message="Fireball!")
             self.moves=[]
+            u_count = Clock.schedule_interval(self.user_counter, 1)
 
         elif self.moves==["l","u","r","u"]:
+            userA="Light"
             tts.speak(message="Lightning!") 
             self.moves=[]
+            u_count = Clock.schedule_interval(self.user_counter, 1)
 
         elif self.moves==["u","l","d","r","u"]:
+            userA="Circle Of Pain"
             tts.speak(message="Circle Of Pain!")
-            self.moves=[]  
+            self.moves=[]
+            u_count = Clock.schedule_interval(self.user_counter, 1)
+
+        elif self.moves==["l","r"]:
+            userA="Shield"
+            tts.speak(message="Shield!")
+            self.moves=[]
+            u_count = Clock.schedule_interval(self.user_counter, 1)  
             
     
 
