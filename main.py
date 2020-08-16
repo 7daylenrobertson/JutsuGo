@@ -217,7 +217,7 @@ class MenuScreen(Screen):
             userA="Shield"
             tts.speak(message="Shield!")
             self.moves=[]
-            u_count = Clock.schedule_interval((self.user_counter), 1)  
+            u_count = Clock.schedule_interval(self.user_counter, 1)  
             
     
 
