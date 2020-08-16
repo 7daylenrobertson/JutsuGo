@@ -44,7 +44,7 @@ Builder.load_string("""
 """)
 
 
-class MenuScreen(Screen,dt):
+class MenuScreen(Screen):
     moves=[]
     health=100
     enemy_health=100
@@ -52,7 +52,7 @@ class MenuScreen(Screen,dt):
     ucounter=3
     accelerometer.enable()
     print(accelerometer.acceleration)
-    def enemy_counter(self,dt):
+    def enemy_counter(self,*args):
         tts.speak(message=self.ecounter)
         self.ecounter-=1
         if self.ecounter<=0:
@@ -112,7 +112,7 @@ class MenuScreen(Screen,dt):
                 eevent = Clock.schedule_interval((self.enemy_attack), 3)
                 Clock.unschedule(eevent)
 
-    def enemy_attack(self,dt):
+    def enemy_attack(self,*args):
         attacks=["Fireball!","Lightning!","Energy Blast!","Circle Of Pain!","Shield"]
         chosen_attack=random.choice(attacks)
         tts.speak(message=chosen_attack)
@@ -157,7 +157,7 @@ class MenuScreen(Screen,dt):
         tts.speak(message="Restarted!")
         print(self.moves) 
 
-    def user_counter(self,dt):
+    def user_counter(self,*args):
         tts.speak(message=self.ucounter)
         self.ucounter-=1
         if self.ucounter<=0:
