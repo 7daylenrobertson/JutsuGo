@@ -60,45 +60,45 @@ class MenuScreen(Screen):
                 if self.userA=="Shield":
                     tts.speak(message="Defended!")
                     self.ecounter=3
-                    Clock.unschedule(self.e_count)
-                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule((self.e_count))
+                    eevent = Clock.schedule_interval((self.enemy_attack), 3)
                     Clock.unschedule(eevent)
                 else:
                     self.health-=10
                     tts.speak(message=str(self.health)+" Health Left")
                     self.ecounter=3
-                    Clock.unschedule(self.e_count)
-                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule((self.e_count))
+                    eevent = Clock.schedule_interval((self.enemy_attack), 3)
                     Clock.unschedule(eevent)
 
             elif self.chosen_attack=="Lightning!":
                 if self.userA=="Shield":
                     tts.speak(message="Defended!")
                     self.ecounter=3
-                    Clock.unschedule(self.e_count)
-                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule((self.e_count))
+                    eevent = Clock.schedule_interval((self.enemy_attack), 3)
                     Clock.unschedule(eevent)
                 else:
                     self.health-=10
                     tts.speak(message=str(self.health)+" Health Left")
                     self.ecounter=3
-                    Clock.unschedule(self.e_count)
-                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule((self.e_count))
+                    eevent = Clock.schedule_interval((self.enemy_attack), 3)
                     Clock.unschedule(eevent)
 
             elif self.chosen_attack=="Energy Blast!":
                 if self.userA=="Shield":
                     tts.speak(message="Defended!")
                     self.ecounter=3
-                    Clock.unschedule(self.e_count)
-                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule((self.e_count))
+                    eevent = Clock.schedule_interval((self.enemy_attack), 3)
                     Clock.unschedule(eevent)
                 else:
                     self.health-=20
                     tts.speak(message=str(self.health)+" Health Left")
                     self.ecounter=3
-                    Clock.unschedule(self.e_count)
-                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                    Clock.unschedule((self.e_count))
+                    eevent = Clock.schedule_interval((self.enemy_attack), 3)
                     Clock.unschedule(eevent)
 
             elif self.chosen_attack=="Circle Of Pain!":
@@ -108,17 +108,17 @@ class MenuScreen(Screen):
                     self.health-=30
                 tts.speak(message=str(self.health)+" Health Left")
                 self.ecounter=3
-                Clock.unschedule(self.e_count)
-                eevent = Clock.schedule_interval(self.enemy_attack, 3)
+                Clock.unschedule((self.e_count))
+                eevent = Clock.schedule_interval((self.enemy_attack), 3)
                 Clock.unschedule(eevent)
 
     def enemy_attack(self):
         attacks=["Fireball!","Lightning!","Energy Blast!","Circle Of Pain!","Shield"]
         chosen_attack=random.choice(attacks)
         tts.speak(message=chosen_attack)
-        e_count = Clock.schedule_interval(self.enemy_counter, 1)
+        e_count = Clock.schedule_interval((self.enemy_counter), 1)
 
-    eevent = Clock.schedule_interval(enemy_attack, 3)
+    eevent = Clock.schedule_interval((enemy_attack), 3)
     Clock.unschedule(eevent)
     
     def enable(self):
@@ -199,25 +199,25 @@ class MenuScreen(Screen):
             userA="Fire"
             tts.speak(message="Fireball!")
             self.moves=[]
-            u_count = Clock.schedule_interval(self.user_counter, 1)
+            u_count = Clock.schedule_interval((self.user_counter), 1)
 
         elif self.moves==["l","u","r","u"]:
             userA="Light"
             tts.speak(message="Lightning!") 
             self.moves=[]
-            u_count = Clock.schedule_interval(self.user_counter, 1)
+            u_count = Clock.schedule_interval((self.user_counter), 1)
 
         elif self.moves==["u","l","d","r","u"]:
             userA="Circle Of Pain"
             tts.speak(message="Circle Of Pain!")
             self.moves=[]
-            u_count = Clock.schedule_interval(self.user_counter, 1)
+            u_count = Clock.schedule_interval((self.user_counter), 1)
 
         elif self.moves==["l","r"]:
             userA="Shield"
             tts.speak(message="Shield!")
             self.moves=[]
-            u_count = Clock.schedule_interval(self.user_counter, 1)  
+            u_count = Clock.schedule_interval((self.user_counter), 1)  
             
     
 
