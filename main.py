@@ -44,7 +44,7 @@ Builder.load_string("""
 """)
 
 
-class MenuScreen(Screen):
+class MenuScreen(Screen,dt):
     moves=[]
     health=100
     enemy_health=100
