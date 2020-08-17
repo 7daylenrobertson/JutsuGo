@@ -63,14 +63,14 @@ class MenuScreen(Screen):
                     tts.speak(message="Defended!")
                     self.ecounter=3
                     Clock.unschedule((self.e_count))
-                    eevent = Clock.schedule_interval(partial(self.enemy_attack), 3)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
                     Clock.unschedule(eevent)
                 else:
                     self.health-=10
                     tts.speak(message=str(self.health)+" Health Left")
                     self.ecounter=3
                     Clock.unschedule((self.e_count))
-                    eevent = Clock.schedule_interval(partial(self.enemy_attack), 3)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
                     Clock.unschedule(eevent)
 
             elif self.chosen_attack=="Lightning!":
@@ -78,14 +78,14 @@ class MenuScreen(Screen):
                     tts.speak(message="Defended!")
                     self.ecounter=3
                     Clock.unschedule((self.e_count))
-                    eevent = Clock.schedule_interval(partial(self.enemy_attack), 3)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
                     Clock.unschedule(eevent)
                 else:
                     self.health-=10
                     tts.speak(message=str(self.health)+" Health Left")
                     self.ecounter=3
                     Clock.unschedule((self.e_count))
-                    eevent = Clock.schedule_interval(partial(self.enemy_attack), 3)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
                     Clock.unschedule(eevent)
 
             elif self.chosen_attack=="Energy Blast!":
@@ -93,14 +93,14 @@ class MenuScreen(Screen):
                     tts.speak(message="Defended!")
                     self.ecounter=3
                     Clock.unschedule((self.e_count))
-                    eevent = Clock.schedule_interval(partial(self.enemy_attack), 3)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
                     Clock.unschedule(eevent)
                 else:
                     self.health-=20
                     tts.speak(message=str(self.health)+" Health Left")
                     self.ecounter=3
                     Clock.unschedule((self.e_count))
-                    eevent = Clock.schedule_interval(partial(self.enemy_attack), 3)
+                    eevent = Clock.schedule_interval(self.enemy_attack, 3)
                     Clock.unschedule(eevent)
 
             elif self.chosen_attack=="Circle Of Pain!":
@@ -118,7 +118,7 @@ class MenuScreen(Screen):
         attacks=["Fireball!","Lightning!","Energy Blast!","Circle Of Pain!","Shield"]
         chosen_attack=random.choice(attacks)
         tts.speak(message=chosen_attack)
-        e_count = Clock.schedule_interval(partial(self.enemy_counter), 1)
+        e_count = Clock.schedule_interval(self.enemy_counter, 1)
 
     eevent = Clock.schedule_interval(enemy_attack, 3)
     #Clock.unschedule(eevent)
