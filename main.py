@@ -54,7 +54,7 @@ class MenuScreen(Screen):
     ucounter=3
     accelerometer.enable()
     print(accelerometer.acceleration)
-    def enemy_counter(self,*largs):
+    def enemy_counter(self,_):
         tts.speak(message=self.ecounter)
         self.ecounter-=1
         if self.ecounter<=0:
@@ -114,7 +114,7 @@ class MenuScreen(Screen):
                 eevent = Clock.schedule_interval(partial(self.enemy_attack), 3)
                 Clock.unschedule(eevent)
 
-    def enemy_attack(self,*largs):
+    def enemy_attack(self,_):
         attacks=["Fireball!","Lightning!","Energy Blast!","Circle Of Pain!","Shield"]
         chosen_attack=random.choice(attacks)
         tts.speak(message=chosen_attack)
@@ -159,7 +159,7 @@ class MenuScreen(Screen):
         tts.speak(message="Restarted!")
         print(self.moves) 
 
-    def user_counter(self,*largs):
+    def user_counter(self,_):
         tts.speak(message=self.ucounter)
         self.ucounter-=1
         if self.ucounter<=0:
@@ -201,25 +201,25 @@ class MenuScreen(Screen):
             userA="Fire"
             tts.speak(message="Fireball!")
             self.moves=[]
-            u_count = Clock.schedule_interval(partial(self.user_counter), 1)
+            u_count = Clock.schedule_interval(self.user_counter, 1)
 
         elif self.moves==["l","u","r","u"]:
             userA="Light"
             tts.speak(message="Lightning!") 
             self.moves=[]
-            u_count = Clock.schedule_interval(partial(self.user_counter), 1)
+            u_count = Clock.schedule_interval(self.user_counter, 1)
 
         elif self.moves==["u","l","d","r","u"]:
             userA="Circle Of Pain"
             tts.speak(message="Circle Of Pain!")
             self.moves=[]
-            u_count = Clock.schedule_interval(partial(self.user_counter), 1)
+            u_count = Clock.schedule_interval(self.user_counter, 1)
 
         elif self.moves==["l","r"]:
             userA="Shield"
             tts.speak(message="Shield!")
             self.moves=[]
-            u_count = Clock.schedule_interval(partial(self.user_counter), 1)  
+            u_count = Clock.schedule_interval(self.user_counter, 1)  
             
     
 
