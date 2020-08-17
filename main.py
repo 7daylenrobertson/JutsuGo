@@ -68,17 +68,25 @@ class MenuScreen(Screen):
                     tts.speak(message="Defended!")
                     MenuScreen.ecounter=5
                     Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                    if MenuScreen.enemy_health<=0:
+                        print("Game End")
+                    else:
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
                 else:
                     MenuScreen.health-=10
                     tts.speak(message=str(MenuScreen.health)+" Health Left")
                     if MenuScreen.health<=0:
                         tts.speak(message="Enemy Wins")
+                        MenuScreen.ecounter=5
+                        Clock.unschedule((MenuScreen.e_count))
                     else:
                         MenuScreen.ecounter=5
                         Clock.unschedule((MenuScreen.e_count))
-                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                        if MenuScreen.enemy_health<=0:
+                            print("Game End")
+                        else:
+                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
 
             elif MenuScreen.chosen_attack=="Lightning!":
@@ -86,17 +94,25 @@ class MenuScreen(Screen):
                     tts.speak(message="Defended!")
                     MenuScreen.ecounter=5
                     Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                    if MenuScreen.enemy_health<=0:
+                        print("Game End")
+                    else:
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
                 else:
                     MenuScreen.health-=10
                     tts.speak(message=str(MenuScreen.health)+" Health Left")
                     if MenuScreen.health<=0:
                         tts.speak(message="Enemy Wins")
+                        MenuScreen.ecounter=5
+                        Clock.unschedule((MenuScreen.e_count))
                     else:
                         MenuScreen.ecounter=5
                         Clock.unschedule((MenuScreen.e_count))
-                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                        if MenuScreen.enemy_health<=0:
+                            print("Game End")
+                        else:
+                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
 
             elif MenuScreen.chosen_attack=="Energy Blast!":
@@ -111,10 +127,15 @@ class MenuScreen(Screen):
                     tts.speak(message=str(MenuScreen.health)+" Health Left")
                     if MenuScreen.health<=0:
                         tts.speak(message="Enemy Wins")
+                        MenuScreen.ecounter=5
+                        Clock.unschedule((MenuScreen.e_count))
                     else:
                         MenuScreen.ecounter=5
                         Clock.unschedule((MenuScreen.e_count))
-                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                        if MenuScreen.enemy_health<=0:
+                            print("Game End")
+                        else:
+                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
 
             elif MenuScreen.chosen_attack=="Circle Of Pain!":
@@ -125,17 +146,27 @@ class MenuScreen(Screen):
                 tts.speak(message=str(MenuScreen.health)+" Health Left")
                 if MenuScreen.health<=0:
                     tts.speak(message="Enemy Wins")
+                    MenuScreen.ecounter=5
+                    Clock.unschedule((MenuScreen.e_count))
                 else:
                     MenuScreen.ecounter=5
                     Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                    if MenuScreen.enemy_health<=0:
+                        print("Game End")
+                    else:
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
             else:
                 if MenuScreen.health<=0:
                     tts.speak(message="Enemy Wins")
+                    MenuScreen.ecounter=5
+                    Clock.unschedule((MenuScreen.e_count))
                 else:
                     MenuScreen.ecounter=5
                     Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                    if MenuScreen.enemy_health<=0:
+                        print("Game End")
+                    else:
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                 
 
     def enemy_attack(self):
@@ -212,8 +243,8 @@ class MenuScreen(Screen):
             MenuScreen.u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)  
         
     def user_counter(self):
-        print("Yessir")
-        tts.speak(message=str(MenuScreen.ucounter))
+        #tts.speak(message=str(MenuScreen.ucounter))
+        print(MenuScreen.ucounter)
         MenuScreen.ucounter-=1
         if MenuScreen.ucounter<=0:
             if MenuScreen.userA=="Fire":
