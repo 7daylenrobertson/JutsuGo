@@ -54,7 +54,7 @@ class MenuScreen(Screen):
     ucounter=3
     accelerometer.enable()
     print(accelerometer.acceleration)
-    def enemy_counter(self,t):
+    def enemy_counter(self):
         print("hey 2")
         tts.speak(message=self.ecounter)
         self.ecounter-=1
@@ -120,9 +120,9 @@ class MenuScreen(Screen):
         attacks=["Fireball!","Lightning!","Energy Blast!","Circle Of Pain!","Shield"]
         chosen_attack=random.choice(attacks)
         tts.speak(message=chosen_attack)
-        e_count = Clock.schedule_interval(self.enemy_counter, 1)
+        e_count = Clock.schedule_interval((MenuScreen.enemy_counter), 1)
 
-    eevent = Clock.schedule_interval(enemy_attack, 3)
+    eevent = Clock.schedule_interval((enemy_attack), 3)
     #Clock.unschedule(eevent)
     
     def enable(self):
