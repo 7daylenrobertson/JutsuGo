@@ -60,7 +60,6 @@ class MenuScreen(Screen):
     print(accelerometer.acceleration)
     def enemy_counter(self):
         print(MenuScreen.ecounter)
-        #tts.speak(message=str(MenuScreen.ecounter))
         MenuScreen.ecounter-=1
         if MenuScreen.ecounter<=0:
             if MenuScreen.chosen_attack=="Fireball!":
@@ -173,7 +172,7 @@ class MenuScreen(Screen):
         print("good")
         attacks=["Fireball!","Lightning!","Energy Blast!","Circle Of Pain!","Shield"]
         MenuScreen.chosen_attack=random.choice(attacks)
-        tts.speak(message=MenuScreen.chosen_attack)
+        tts.speak(message="Enemy Used "+ str(MenuScreen.chosen_attack))
         Clock.unschedule(MenuScreen.eevent)
         MenuScreen.e_count = Clock.schedule_interval((MenuScreen.enemy_counter), 1)
 
