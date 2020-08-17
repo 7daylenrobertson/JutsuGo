@@ -50,61 +50,71 @@ class MenuScreen(Screen):
     moves=[]
     health=100
     enemy_health=100
-    ecounter=3
+    ecounter=5
     ucounter=3
     chosen_attack=""
     userA=""
     e_count=None
+    u_count=None
     accelerometer.enable()
     print(accelerometer.acceleration)
     def enemy_counter(self):
-        print("hey 2")
-        tts.speak(message=str(MenuScreen.ecounter))
+        print(MenuScreen.ecounter)
+        #tts.speak(message=str(MenuScreen.ecounter))
         MenuScreen.ecounter-=1
         if MenuScreen.ecounter<=0:
             if MenuScreen.chosen_attack=="Fireball!":
                 if MenuScreen.userA=="Shield":
                     tts.speak(message="Defended!")
-                    MenuScreen.ecounter=3
+                    MenuScreen.ecounter=5
                     Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
+                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
                 else:
                     MenuScreen.health-=10
                     tts.speak(message=str(MenuScreen.health)+" Health Left")
-                    MenuScreen.ecounter=3
-                    Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
+                    if MenuScreen.health<=0:
+                        tts.speak(message="Enemy Wins")
+                    else:
+                        MenuScreen.ecounter=5
+                        Clock.unschedule((MenuScreen.e_count))
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
 
             elif MenuScreen.chosen_attack=="Lightning!":
                 if MenuScreen.userA=="Shield":
                     tts.speak(message="Defended!")
-                    MenuScreen.ecounter=3
+                    MenuScreen.ecounter=5
                     Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
+                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
                 else:
                     MenuScreen.health-=10
                     tts.speak(message=str(MenuScreen.health)+" Health Left")
-                    MenuScreen.ecounter=3
-                    Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
+                    if MenuScreen.health<=0:
+                        tts.speak(message="Enemy Wins")
+                    else:
+                        MenuScreen.ecounter=5
+                        Clock.unschedule((MenuScreen.e_count))
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
 
             elif MenuScreen.chosen_attack=="Energy Blast!":
                 if MenuScreen.userA=="Shield":
                     tts.speak(message="Defended!")
-                    MenuScreen.ecounter=3
+                    MenuScreen.ecounter=5
                     Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
+                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
                 else:
                     MenuScreen.health-=20
                     tts.speak(message=str(MenuScreen.health)+" Health Left")
-                    MenuScreen.ecounter=3
-                    Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
+                    if MenuScreen.health<=0:
+                        tts.speak(message="Enemy Wins")
+                    else:
+                        MenuScreen.ecounter=5
+                        Clock.unschedule((MenuScreen.e_count))
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                     
 
             elif MenuScreen.chosen_attack=="Circle Of Pain!":
@@ -113,13 +123,19 @@ class MenuScreen(Screen):
                 else:
                     MenuScreen.health-=30
                 tts.speak(message=str(MenuScreen.health)+" Health Left")
-                MenuScreen.ecounter=3
-                Clock.unschedule((MenuScreen.e_count))
-                MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
+                if MenuScreen.health<=0:
+                    tts.speak(message="Enemy Wins")
+                else:
+                    MenuScreen.ecounter=5
+                    Clock.unschedule((MenuScreen.e_count))
+                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
             else:
-                MenuScreen.ecounter=3
-                Clock.unschedule((MenuScreen.e_count))
-                MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
+                if MenuScreen.health<=0:
+                    tts.speak(message="Enemy Wins")
+                else:
+                    MenuScreen.ecounter=5
+                    Clock.unschedule((MenuScreen.e_count))
+                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
                 
 
     def enemy_attack(self):
@@ -130,8 +146,7 @@ class MenuScreen(Screen):
         Clock.unschedule(MenuScreen.eevent)
         MenuScreen.e_count = Clock.schedule_interval((MenuScreen.enemy_counter), 1)
 
-    eevent = Clock.schedule_interval((enemy_attack), 3)
-    #Clock.unschedule(eevent)
+    eevent = Clock.schedule_interval((enemy_attack), 5)
     
     def enable(self):
         print("turned on")
@@ -173,28 +188,28 @@ class MenuScreen(Screen):
 
     def submit(self):
         if self.moves==["f","b","f"]:
-            userA="Fire"
+            MenuScreen.userA="Fire"
             tts.speak(message="Fireball!")
             self.moves=[]
-            u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)
+            MenuScreen.u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)
 
         elif self.moves==["l","u","r","u"]:
-            userA="Light"
+            MenuScreen.userA="Light"
             tts.speak(message="Lightning!") 
             self.moves=[]
-            u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)
+            MenuScreen.u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)
 
         elif self.moves==["u","l","d","r","u"]:
-            userA="Circle Of Pain"
+            MenuScreen.userA="Circle Of Pain"
             tts.speak(message="Circle Of Pain!")
             self.moves=[]
-            u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)
+            MenuScreen.u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)
 
         elif self.moves==["l","r"]:
-            userA="Shield"
+            MenuScreen.userA="Shield"
             tts.speak(message="Shield!")
             self.moves=[]
-            u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)  
+            MenuScreen.u_count = Clock.schedule_interval((MenuScreen.user_counter), 1)  
         
     def user_counter(self):
         print("Yessir")
@@ -205,34 +220,47 @@ class MenuScreen(Screen):
                 if MenuScreen.chosen_attack=="Shield":
                     tts.speak(message="Enemy Defended!")
                     MenuScreen.ucounter=3
-                    Clock.unschedule(u_count)
+                    Clock.unschedule((MenuScreen.u_count))
 
                 else:
-                    self.enemy_health-=10
-                    tts.speak(message=str(self.enemy_health)+" Enemy Health Left")
-                    self.ucounter=3
-                    Clock.unschedule(u_count)
+                    MenuScreen.enemy_health-=10
+                    tts.speak(message=str(MenuScreen.enemy_health)+" Enemy Health Left")
+                    if MenuScreen.enemy_health<=0:
+                        tts.speak(message="You Win!")
+                    
+                    MenuScreen.ucounter=3
+                    Clock.unschedule((MenuScreen.u_count))
 
-            elif self.userA=="Light":
-                if self.chosen_attack=="Shield":
+            elif MenuScreen.userA=="Light":
+                if MenuScreen.chosen_attack=="Shield":
                     tts.speak(message="Enemy Defended!")
-                    self.ucounter=3
-                    Clock.unschedule(u_count)
+                    MenuScreen.ucounter=3
+                    Clock.unschedule((MenuScreen.u_count))
                 else:
-                    self.enemy_health-=10
-                    tts.speak(message=str(self.enemy_health)+" Enemy Health Left")
-                    self.ucounter=3
-                    Clock.unschedule(u_count)
+                    MenuScreen.enemy_health-=10
+                    tts.speak(message=str(MenuScreen.enemy_health)+" Enemy Health Left")
+                    if MenuScreen.enemy_health<=0:
+                        tts.speak(message="You Win!")
+                    
+                    MenuScreen.ucounter=3
+                    Clock.unschedule((MenuScreen.u_count))
 
 
-            elif self.userA=="Circle Of Pain":
-                if self.chosen_attack=="Shield":
-                    self.enemy_health-=5
+            elif MenuScreen.userA=="Circle Of Pain":
+                if MenuScreen.chosen_attack=="Shield":
+                    MenuScreen.enemy_health-=5
                 else:
-                    self.enemy_health-=30
-                tts.speak(message=str(self.enemy_health)+" Enemy Health Left")
-                self.ucounter=3
-                Clock.unschedule(u_count)
+                    MenuScreen.enemy_health-=30
+                tts.speak(message=str(MenuScreen.enemy_health)+" Enemy Health Left")
+                if MenuScreen.enemy_health<=0:
+                    tts.speak(message="You Win!")
+
+                MenuScreen.ucounter=3
+                Clock.unschedule(MenuScreen.u_count)
+            else:
+                MenuScreen.ucounter=3
+                Clock.unschedule(MenuScreen.u_count)
+                    
             
     
 
