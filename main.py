@@ -121,7 +121,7 @@ class MenuScreen(Screen):
         e_count = Clock.schedule_interval(partial(self.enemy_counter), 1)
 
     eevent = Clock.schedule_interval(partial(enemy_attack), 3)
-    Clock.unschedule(eevent)
+    #Clock.unschedule(eevent)
     
     def enable(self):
         print("turned on")
@@ -159,7 +159,35 @@ class MenuScreen(Screen):
         tts.speak(message="Restarted!")
         print(self.moves) 
 
+    
+
+    def submit(self):
+        if self.moves==["f","b","f"]:
+            userA="Fire"
+            tts.speak(message="Fireball!")
+            self.moves=[]
+            u_count = Clock.schedule_interval(self.user_counter, 1)
+
+        elif self.moves==["l","u","r","u"]:
+            userA="Light"
+            tts.speak(message="Lightning!") 
+            self.moves=[]
+            u_count = Clock.schedule_interval(self.user_counter, 1)
+
+        elif self.moves==["u","l","d","r","u"]:
+            userA="Circle Of Pain"
+            tts.speak(message="Circle Of Pain!")
+            self.moves=[]
+            u_count = Clock.schedule_interval(self.user_counter, 1)
+
+        elif self.moves==["l","r"]:
+            userA="Shield"
+            tts.speak(message="Shield!")
+            self.moves=[]
+            u_count = Clock.schedule_interval(self.user_counter, 1)  
+        
     def user_counter(self,_):
+        print("Yessir")
         tts.speak(message=self.ucounter)
         self.ucounter-=1
         if self.ucounter<=0:
@@ -195,31 +223,6 @@ class MenuScreen(Screen):
                 tts.speak(message=str(self.enemy_health)+" Enemy Health Left")
                 self.ucounter=3
                 Clock.unschedule(u_count)
-
-    def submit(self):
-        if self.moves==["f","b","f"]:
-            userA="Fire"
-            tts.speak(message="Fireball!")
-            self.moves=[]
-            u_count = Clock.schedule_interval(self.user_counter, 1)
-
-        elif self.moves==["l","u","r","u"]:
-            userA="Light"
-            tts.speak(message="Lightning!") 
-            self.moves=[]
-            u_count = Clock.schedule_interval(self.user_counter, 1)
-
-        elif self.moves==["u","l","d","r","u"]:
-            userA="Circle Of Pain"
-            tts.speak(message="Circle Of Pain!")
-            self.moves=[]
-            u_count = Clock.schedule_interval(self.user_counter, 1)
-
-        elif self.moves==["l","r"]:
-            userA="Shield"
-            tts.speak(message="Shield!")
-            self.moves=[]
-            u_count = Clock.schedule_interval(self.user_counter, 1)  
             
     
 
