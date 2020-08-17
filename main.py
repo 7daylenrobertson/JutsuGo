@@ -115,14 +115,14 @@ class MenuScreen(Screen):
                 eevent = Clock.schedule_interval(self.enemy_attack, 3)
                 Clock.unschedule(eevent)
 
-    def enemy_attack(self,t):
+    def enemy_attack(self):
         print("good")
         attacks=["Fireball!","Lightning!","Energy Blast!","Circle Of Pain!","Shield"]
         chosen_attack=random.choice(attacks)
         tts.speak(message=chosen_attack)
         e_count = Clock.schedule_interval(self.enemy_counter, 1)
 
-    eevent = Clock.schedule_interval(enemy_attack("."), 3)
+    eevent = Clock.schedule_interval(enemy_attack, 3)
     #Clock.unschedule(eevent)
     
     def enable(self):
