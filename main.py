@@ -115,6 +115,10 @@ class MenuScreen(Screen):
                 MenuScreen.ecounter=3
                 Clock.unschedule((MenuScreen.e_count))
                 eevent = Clock.schedule_interval(MenuScreen.enemy_attack, 3)
+            else:
+                MenuScreen.ecounter=3
+                Clock.unschedule((MenuScreen.e_count))
+                eevent = Clock.schedule_interval(MenuScreen.enemy_attack, 3)
                 
 
     def enemy_attack(self):
