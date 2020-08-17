@@ -56,9 +56,9 @@ class MenuScreen(Screen):
     print(accelerometer.acceleration)
     def enemy_counter(self):
         print("hey 2")
-        tts.speak(message=MenuScreen.ecounter)
-        MenuScreen.ecounter-=1
-        if MenuScreen.ecounter<=0:
+        tts.speak(message=str(self.ecounter))
+        self.ecounter-=1
+        if self.ecounter<=0:
             if MenuScreen.chosen_attack=="Fireball!":
                 if MenuScreen.userA=="Shield":
                     tts.speak(message="Defended!")
