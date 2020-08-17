@@ -120,7 +120,7 @@ class MenuScreen(Screen):
         tts.speak(message=chosen_attack)
         e_count = Clock.schedule_interval(partial(self.enemy_counter), 1)
 
-    eevent = Clock.schedule_interval(partial(enemy_attack), 3)
+    eevent = Clock.schedule_interval(enemy_attack, 3)
     #Clock.unschedule(eevent)
     
     def enable(self):
