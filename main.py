@@ -1,7 +1,7 @@
 import kivy
 kivy.require('1.11.1')
 from plyer import accelerometer, tts
-
+from kivmob import KivMob, TestIds
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import Screen, ScreenManager
@@ -47,6 +47,10 @@ Builder.load_string("""
 
 
 class MenuScreen(Screen):
+    ads = KivMob(TestIds.APP)
+    ads.new_interstitial(TestIds.INTERSTITIAL)
+    ads.request_interstitial()
+    ads.show_interstitial()
     moves=[]
     health=100
     enemy_health=100
@@ -70,7 +74,7 @@ class MenuScreen(Screen):
                     if MenuScreen.enemy_health<=0:
                         print("Game End")
                     else:
-                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
                     
                 else:
                     MenuScreen.health-=10
@@ -85,7 +89,7 @@ class MenuScreen(Screen):
                         if MenuScreen.enemy_health<=0:
                             print("Game End")
                         else:
-                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
                     
 
             elif MenuScreen.chosen_attack=="Lightning!":
@@ -96,7 +100,7 @@ class MenuScreen(Screen):
                     if MenuScreen.enemy_health<=0:
                         print("Game End")
                     else:
-                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
                     
                 else:
                     MenuScreen.health-=10
@@ -111,7 +115,7 @@ class MenuScreen(Screen):
                         if MenuScreen.enemy_health<=0:
                             print("Game End")
                         else:
-                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
                     
 
             elif MenuScreen.chosen_attack=="Energy Blast!":
@@ -119,7 +123,7 @@ class MenuScreen(Screen):
                     tts.speak(message="Defended!")
                     MenuScreen.ecounter=5
                     Clock.unschedule((MenuScreen.e_count))
-                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                    MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
                     
                 else:
                     MenuScreen.health-=20
@@ -134,7 +138,7 @@ class MenuScreen(Screen):
                         if MenuScreen.enemy_health<=0:
                             print("Game End")
                         else:
-                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                            MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
                     
 
             elif MenuScreen.chosen_attack=="Circle Of Pain!":
@@ -153,7 +157,7 @@ class MenuScreen(Screen):
                     if MenuScreen.enemy_health<=0:
                         print("Game End")
                     else:
-                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
             else:
                 if MenuScreen.health<=0:
                     tts.speak(message="Enemy Wins")
@@ -165,7 +169,7 @@ class MenuScreen(Screen):
                     if MenuScreen.enemy_health<=0:
                         print("Game End")
                     else:
-                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 5)
+                        MenuScreen.eevent = Clock.schedule_interval((MenuScreen.enemy_attack), 3)
                 
 
     def enemy_attack(self):
@@ -176,7 +180,7 @@ class MenuScreen(Screen):
         Clock.unschedule(MenuScreen.eevent)
         MenuScreen.e_count = Clock.schedule_interval((MenuScreen.enemy_counter), 1)
 
-    eevent = Clock.schedule_interval((enemy_attack), 5)
+    eevent = Clock.schedule_interval((enemy_attack), 3)
     
     def enable(self):
         print("turned on")
